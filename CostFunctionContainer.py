@@ -1,10 +1,4 @@
-def calcVC(X, VCU):
-    '''
-    Calculate the total Variable Cost, given the Units and the VCU
-    '''
-    VC = X * VCU
-    return(VC)
-
+##################---BASIC-FORMULA---##################
 def calcX(S, SP):
     '''
     Calculate the Sold units, given the Sales and the selling Price
@@ -12,23 +6,49 @@ def calcX(S, SP):
     x = S/SP
     return(x)
 
+def calcTVC(X, VCU):
+    '''
+    Calculate the total Variable Cost, given the Units and the VCU
+    '''
+    VC = X * VCU
+    return(VC)
 
-def calcCMR(VC, SP):
+def calcVCU(X, TVC):
     '''
-    Calculating the CMR 
+    CalculateVC per unit, given TVC and X
     '''
-    # CM = calcCM(VC, SP)
-    CMR = (calcCM(VC, SP))/SP
-    return(CMR)
-    
+    VCU = TVC / X
+    return(VCU)
+
+
+
+##################---BASIC-FORMULA---##################
+
+##################---Contribution Margin---##################
 
 def calcCM(TVC, S):
     '''
-    Calculation for the Contribution Margin, insert first the Sales and afterwards the VariableCost
+  Contribution Margion gesamt = Deckungsbeitrag
     '''
     CM = S - TVC
     return(CM)
 
+def calcCMU(VCU, SP):
+    '''
+  Contribution Margion per Stück = Deckungsbeitrag jedes einzelnen Stückes
+    '''
+    CMU = SP - VCU
+    return(CMU)
+
+
+def calcCMR(VCU, SP):
+    '''
+    Wieviel % von dem SP gehen für die Deckung der Kosten/ zu Generation des Gewinnes bei
+    '''
+    # CM = calcCM(VC, SP)
+    CMR = (calcCM(VCU, SP))/SP
+    return(CMR)
+##################---Contribution Margin---##################    
 ##################---PROFIT---##################
 def calcProfitsimpleTotal(TFC, TVC, S):
     '''
@@ -63,8 +83,11 @@ def calcBEPUnits(TFC, VCU, SP):
     BEPu=(TFC/cm)
     return(BEPu)
 
-def calcBEPUnitsWithCMR(TFC,CMR):
-    BEPu = TFC / CMR
+def calcBEPUnitsWithCMU(TFC, CMU):
+    '''
+    Calculation BEPUnits with the CM /Unit
+    '''
+    BEPu = TFC / CMU
     return(BEPu)
 
 def calcBEPSalesWithCMR(TFC, VCU, SP):
@@ -80,6 +103,13 @@ def calcBEPSalesSimple(BEPU, SP):
     '''
     BEPs = BEPU * SP
     return(BEPs)
+
+def calcMarginOfSafety(S, BEPS):
+    '''
+    Calculation for
+    '''
+    MS = S - BEPS
+    return(MS)
 
 
 def printBEP(X, TFC, VC, SP, switch):
