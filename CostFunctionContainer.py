@@ -1,9 +1,17 @@
-def calBEPSalesWithCMR(TFC, VC, SP):
+def calcVC(X, VCU):
     '''
-    Calculation the return at Point of BEV with the CMR
+    Calculate the total Variable Cost, given the Units and the VCU
     '''
-    BEPs=(TFC/(calcCMR(VC, SP)))
-    return(BEPs)
+    VC = X * VCU
+    return(VC)
+
+def calcX(S, SP):
+    '''
+    Calculate the Sold units, given the Sales and the selling Price
+    '''
+    x = S/SP
+    return(x)
+
 
 def calcCMR(VC, SP):
     '''
@@ -14,14 +22,6 @@ def calcCMR(VC, SP):
     return(CMR)
     
 
-def calBEPUnits(TFC, VC, SP):
-    '''
-    Calculation for
-    '''
-    cm = calcCM(VC, SP)
-    BEPu=(TFC/cm)
-    return(BEPu)
-
 def calcCM(VC, S):
     '''
     Calculation for the Contribution Margin, insert first the Sales and afterwards the VariableCost
@@ -29,12 +29,54 @@ def calcCM(VC, S):
     CM = S - VC
     return(CM)
 
-def calcProfit(X, TFC, VC, SP):
+##################---PROFIT---##################
+def calcProfitsimpleTotal(TFC, TVC, S):
     '''
     Calculation for the Profit, give the Sequence of "SP, X, VC, TFC"
     '''
-    profit = ((SP * X) - (VC * X) - TFC)
+    profit = S - TVC - TFC
     return(profit)
+
+
+def calcProfitsimplePerUnit(X, TFC, VCU, SP):
+    '''
+    Calculation for the Profit, give the Sequence of "SP, X, VC, TFC"
+    '''
+    profit = ((SP * X) - (VCU * X) - TFC)
+    return(profit)
+
+def calcProfitWithCMR(S, CMR, TFC):
+    '''
+    Calculation for the Profit, given the Sales and the CMR
+    '''
+    profit = (S * CMR) - TFC
+    return(profit)
+##################---PROFIT---##################
+
+##################---BEP---##################
+
+def calcBEPUnits(TFC, VCU, SP):
+    '''
+    Calculation for
+    '''
+    cm = calcCM(VCU, SP)
+    BEPu=(TFC/cm)
+    return(BEPu)
+
+def calcBEPSalesWithCMR(TFC, VCU, SP):
+    '''
+    Calculation the return at Point of BEP with the CMR
+    '''
+    BEPs=(TFC/(calcCMR(VCU, SP)))
+    return(BEPs)
+
+def calcBEPSalesSimple(BEPU, SP):
+    '''
+    Calculation the return at Point of BEP Simple
+    '''
+    BEPs = BEPU * SP
+    return(BEPs)
+
 
 def printBEP(X, TFC, VC, SP, switch):
     import matplotlib.pyplot as plt
@@ -67,3 +109,6 @@ def printBEP(X, TFC, VC, SP, switch):
         plt.fill_between(quantity, varCostSeries, sellingPriceSeries, color='blue', alpha=.1)
     plt.legend()
     #return(plt)
+    
+    
+##################---BEP---##################
