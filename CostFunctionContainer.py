@@ -22,11 +22,11 @@ def calcCMR(VC, SP):
     return(CMR)
     
 
-def calcCM(VC, S):
+def calcCM(TVC, S):
     '''
     Calculation for the Contribution Margin, insert first the Sales and afterwards the VariableCost
     '''
-    CM = S - VC
+    CM = S - TVC
     return(CM)
 
 ##################---PROFIT---##################
@@ -61,6 +61,10 @@ def calcBEPUnits(TFC, VCU, SP):
     '''
     cm = calcCM(VCU, SP)
     BEPu=(TFC/cm)
+    return(BEPu)
+
+def calcBEPUnitsWithCMR(TFC,CMR):
+    BEPu = TFC / CMR
     return(BEPu)
 
 def calcBEPSalesWithCMR(TFC, VCU, SP):
